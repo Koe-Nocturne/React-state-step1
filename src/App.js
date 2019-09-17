@@ -1,26 +1,27 @@
 import React from 'react';
-import logo from './logo.svg';
 import './App.css';
+import BoxContainer from './BoxContainer';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+class App extends React.Component {
+  constructor(props) {
+    super(props);
+    this.colors = ["red", "white", "purple", "olive", "green", "maroon", "navy", "silver", "aqua", "lime", "teal", "fuchsia", "blue", "yellow", "red", "gray"];
+    this.state = { colors: this.generate() };
+  };
+  generate() {
+    let colorsArr = Array.from({ length: this.colors.length })
+    let colorValArr = colorsArr.map(
+          n => Math.floor(Math.random() * this.colors.length));
+    return colorValArr;
+  }
+  
+  render() {
+    return (
+      <div>
+        {this.state.colors.map(n => <BoxContainer color={this.colors[n]} />)}
+      </div>
+      );  
+  }
 }
 
 export default App;
